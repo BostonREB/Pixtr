@@ -1,8 +1,8 @@
 <h2>My Galleries</h2>
 
-<%= link_to "New gallery", "/galleries/new" %>
+<%= link_to "New gallery",  new_gallery_path %>
 
 <% @galleries.each do |gallery| %>
-  <%= link_to gallery.name, "/galleries/#{gallery.id}" %>
+  <%= link_to gallery.name, gallery_path(gallery) %>
 <% end %>
 

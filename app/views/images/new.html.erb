@@ -1,0 +1,14 @@
+<%= form_for [@gallery, @image] do |form| %>
+  <div>
+    <%= form.text_field :name, placeholder: "Name" %>
+  </div>
+  <div>
+    <%= form.text_field :description, placeholder: "Description" %>
+  </div>
+  <div>
+  <div>
+    <%= form.text_field :url, placeholder: "URL" %>
+  </div>
+  <div>
+  <%= form.submit "Create image" %>
+<% end %>
