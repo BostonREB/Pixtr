@@ -3,7 +3,7 @@ get "galleries/random_gallery" => "random_galleries#show"
 
   root "galleries#index"
   resources :galleries do
-    resources :images
+    resources :images, shallow: true
   end
 
 
