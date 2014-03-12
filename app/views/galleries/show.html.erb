@@ -6,11 +6,11 @@
   <%= link_to "Delete", @gallery, method: :delete %> <!-- polymorphic_path implicitly changes object @gallery to the path gallery_path -->
 
   <%= link_to "New Image", new_gallery_image_path(@gallery) %>
-<div>
+</div>
 
 <% @gallery.images.each do |image| %>
   <%= link_to image do %>
-    <img src="<%= image.url %>">
+    <img src="<%= image.url %>"><br>
   <% end %>
 <% end %>
 
