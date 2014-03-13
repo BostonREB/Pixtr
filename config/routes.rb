@@ -1,7 +1,7 @@
 Pixtr::Application.routes.draw do
 get "galleries/random_gallery" => "random_galleries#show"
 
-  root "galleries#index"
+  root "homes#show"
   resources :galleries do
     resources :images, shallow: true
   end
