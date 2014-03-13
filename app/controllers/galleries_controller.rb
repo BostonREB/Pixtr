@@ -14,8 +14,8 @@ class GalleriesController < ApplicationController
   end 
 
   def create
-    gallery = Gallery.create(gallery_params)
-    redirect_to gallery_path(@gallery)
+    @gallery = Gallery.create(gallery_params)
+    redirect_to gallery_path(@gallery.id)
   end 
 
   def edit
