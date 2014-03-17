@@ -1,6 +1,16 @@
 <%= form_for(@image) do |form| %>
+<div>
+  <%= form.label "Name" %>
   <%= form.text_field :name %>
+</div>
+<div>
+  <%= form.label "URL" %>
   <%= form.text_field :url %>
+</div>
+<div>
+  <%= form.label "Description" %>
   <%= form.text_field :description %>
+</div>
   <%= form.submit "Update Image" %>
+
 <% end %>

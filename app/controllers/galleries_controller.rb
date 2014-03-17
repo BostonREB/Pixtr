@@ -1,4 +1,6 @@
 class GalleriesController < ApplicationController
+  before_action :authorize, except: [:show] #runs filter for everything but "show" action
+
   def index   #actions are just methods.  Here it's the action "index"
     #any method inside the Controller is an "Action"
     ## renders a view, in this case the "index" view.
