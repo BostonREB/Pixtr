@@ -6,6 +6,8 @@ get "galleries/random_gallery" => "random_galleries#show"
     resources :images, only: [:new, :create]
   end
 
+  resources :groups, only: [:index, :new, :create, :show]
+
   resources :images, except: [:index, :new, :create] do
     resources :comments, only: [:create]
   end

@@ -1,0 +1,12 @@
+<%= form_for @group do |form| %>
+
+<%= render "form_errors", target: @group %>
+
+  <div>
+    <%=form.text_field :name, placeholder: "Name" %>
+  </div>
+  <div>
+    <%=form.text_field :description, placeholder: "Description" %>
+  </div>
+  <%= form.submit "Create Group" %>
+<% end %> 
