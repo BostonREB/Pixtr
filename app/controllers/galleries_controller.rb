@@ -16,8 +16,12 @@ class GalleriesController < ApplicationController
   end 
 
   def create
-    gallery = current_user.galleries.create(gallery_params)  #creates gallery that belongs to user
-    redirect_to gallery_path(gallery)
+    @gallery = current_user.galleries.new(gallery_params)  #creates gallery that belongs to user
+    if @gallery.save
+      redirect_to @gallery
+    else
+      render :new #only renders the template and displays the previously entered data o user can make changes
+    end
   end 
 
   def edit
@@ -25,9 +29,12 @@ class GalleriesController < ApplicationController
   end
 
   def update
-    gallery = current_user.galleries.find(params[:id])
-    gallery.update(gallery_params)
-    redirect_to gallery
+    @gallery = current_user.galleries.find(params[:id])
+    if @gallery.update(gallery_params)
+      redirect_to @gallery
+    else
+      render :edit
+    end
   end
 
   def destroy

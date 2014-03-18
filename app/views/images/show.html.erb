@@ -10,7 +10,7 @@
   </div>
 <% end %>
 
-<%= image_tag(@image.url, width: 300) %>
+<%= image_tag(@image.url, width: 500) %>
 <h2><%= @image.description %></h2>
 
 <% if signed_in? %>
@@ -22,11 +22,10 @@
   <%= link_to "Sign In", sign_in_path %> to comment
 <% end %>
 
-<% @comments.each do |comment| %>
-  <div>
-    <%= comment.user.email %>
-    <%= comment.body %>
-    <%= time_ago_in_words(comment.created_at) %> ago
-  </div>
-<% end %>
+
+<%= render @comments %>
+<% # render can render a collection.  It iterates over each of the things in the collection %>
+<% # Ruby knows the class of the object, here comment, and it uses a local variable of the same type in the partial %>
+<% # VVV same as the above %>  
+<% #render "comments/comment", collection: @comments %>
 

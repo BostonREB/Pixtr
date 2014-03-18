@@ -10,8 +10,4 @@
   </div>
 <% end %>
 
-<% @gallery.images.each do |image| %>
-  <%= link_to image do %>
-    <img src="<%= image.url %>">
-  <% end %>
-<% end %>
+<%= render @gallery.images %>

@@ -26,9 +26,12 @@ class ImagesController < ApplicationController
   end
 
   def update 
-    image = current_user.images.find(params[:id])
-    image.update(image_params)
-    redirect_to image
+    @image = current_user.images.find(params[:id])
+    if @image.update(image_params)
+      redirect_to @image
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -37,7 +40,7 @@ class ImagesController < ApplicationController
     redirect_to image.gallery
   end
 
-  #VVV same as above before Image was changed in model
+  #VVV same as above before image was changed in model
   # def destroy
   #   image = Image.find(params[:id])
   #   image.destroy

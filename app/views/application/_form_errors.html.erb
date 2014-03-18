@@ -1,0 +1,11 @@
+<% if target.errors.any? %>
+    <p>Could not save for the followsing reasons:</p>
+    <ul>
+      <% target.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <%end %>
+    </ul>
+  <% end %>
+
+
+

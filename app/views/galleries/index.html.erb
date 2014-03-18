@@ -2,7 +2,6 @@
 
 <%= link_to "New gallery",  new_gallery_path %>
 
-<% @galleries.each do |gallery| %>
-  <%= link_to gallery.name, gallery_path(gallery) %>
-<% end %>
+<%= render @galleries %> 
+
 
