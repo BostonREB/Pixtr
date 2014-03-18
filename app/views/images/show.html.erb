@@ -10,8 +10,8 @@
   </div>
 <% end %>
 
-  <%= image_tag(@image.url, width: 300) %>
-  <h2><%= @image.description %></h2>
+<%= image_tag(@image.url, width: 300) %>
+<h2><%= @image.description %></h2>
 
 <% if signed_in? %>
   <%= form_for [@image, @comment] do |form| %>
@@ -26,6 +26,7 @@
   <div>
     <%= comment.user.email %>
     <%= comment.body %>
+    <%= time_ago_in_words(comment.created_at) %> ago
   </div>
 <% end %>
 

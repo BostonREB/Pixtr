@@ -6,15 +6,19 @@ class ImagesController < ApplicationController
   end
 
   def create
-    gallery = current_user.galleries.find(params[:gallery_id])
-    gallery.images.create(image_params)
-    redirect_to gallery
+    @gallery = current_user.galleries.find(params[:gallery_id])
+    @image = @gallery.images.new(image_params)
+    if @image.save
+      redirect_to @gallery
+    else
+      render :new #only renders the template and displays the previously entered data o user can make changes
+    end
   end
 
   def show
     @image = Image.find(params[:id])
     @comment = Comment.new
-    @comments = @image.comments
+    @comments = @image.comments.newest
   end
 
   def edit
