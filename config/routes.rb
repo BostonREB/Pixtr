@@ -12,6 +12,12 @@ get "galleries/random_gallery" => "random_galleries#show"
     resources :comments, only: [:create]
   end
 
+  resources :users, only: [:show] do
+    member do # /users/:id
+      post "follow" => "following_relationships#create"
+    end
+  end
+
 
   # get "/galleries/new" => "galleries#new"
   # get "galleries/random_gallery" => "random_galleries#show"

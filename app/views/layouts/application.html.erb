@@ -12,6 +12,7 @@
     <% if signed_in? %>
       <nav>
         <ul>
+          <li><%= link_to "My Images", user_path(current_user) %></li>
           <li><%= link_to "My Galleries", galleries_path %></li>
           <li><%= link_to "Groups", groups_path %></li>
         </ul>
