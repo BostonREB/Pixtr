@@ -14,6 +14,10 @@
   <%= form.label "Description" %>
   <%= form.text_field :description %>
 </div>
+<div>
+  <%= form.collection_check_boxes :group_ids, @groups, :id, :name %> 
+
+</div>
   <%= form.submit "Update Image" %>
 
 <% end %>
