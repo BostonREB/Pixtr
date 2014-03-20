@@ -13,8 +13,9 @@ get "galleries/random_gallery" => "random_galleries#show"
   end
 
   resources :users, only: [:show] do
-    member do # /users/:id
+    member do # /users/:id.  A member of the user.
       post "follow" => "following_relationships#create"
+      delete "unfollow" => "following_relationships#destroy"
     end
   end
 
