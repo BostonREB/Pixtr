@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :groups, through: :group_memberships 
 
   has_many :followed_user_relationships, 
-    foreign_key: :follower_id
+    foreign_key: :follower_id,
     class_name: "FollowingRelationship"
 
   has_many :followed_users, 
