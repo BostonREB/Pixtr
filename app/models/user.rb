@@ -23,6 +23,11 @@ class User < ActiveRecord::Base
   has_many :followers, 
     through: :follower_relationships
 
+  has_many :likes
+
+  has_many :liked_images,
+    through: :likes, source: :image #source: tells rails to look for 
+
   def follow(other_user)
     followed_users << other_user
   end
@@ -35,5 +40,28 @@ class User < ActiveRecord::Base
     followed_user_ids.include? other_user.id
   end
 
+  def join(group)
+    groups << group
+  end
+
+  def leave(group)
+    groups.destroy(group)
+  end
+
+  def member?(group)
+    group_ids.include? group.id
+  end 
+
+  def like(image)
+    liked_images << image
+  end
+
+  def unlike(image)
+    liked_images.destroy(image)
+  end
+
+  def liked?(image)
+    liked_images.include? image
+  end
 
 end

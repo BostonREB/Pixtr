@@ -6,9 +6,18 @@ get "galleries/random_gallery" => "random_galleries#show"
     resources :images, only: [:new, :create]
   end
 
-  resources :groups, only: [:index, :new, :create, :show]
+  resources :groups, only: [:index, :new, :create, :show] do
+    member do
+      post "join" => "group_memberships#create"
+      delete "leave" => "group_memberships#destroy"
+    end
+  end
 
   resources :images, except: [:index, :new, :create] do
+    member do
+      post "like" => "image_likes#create"
+      delete "unlike" => "image_likes#destroy"
+    end
     resources :comments, only: [:create]
   end
 

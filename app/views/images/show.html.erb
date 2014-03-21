@@ -16,10 +16,20 @@
 <p>Added on: <%= @image.created_at.to_date %></p>
 
 <% if signed_in? %>
-  <%= form_for [@image, @comment] do |form| %>
-    <%= form.text_area :body %>
-    <%= form.submit "Comment" %>
-  <% end %> 
+
+    <% if current_user.liked? @image %>
+      <%= button_to "Unlike", unlike_image_path(@image), method: :delete %>
+    <% else %>  
+      <%= button_to "Like", like_image_path(@image) %>
+    <% end %>
+
+    <p><%= @image.likes.size %> users have liked this image!</p>
+
+    <%= form_for [@image, @comment] do |form| %>
+      <%= form.text_area :body %>
+      <%= form.submit "Comment" %>
+    <% end %> 
+
 <% else %>
   <%= link_to "Sign In", sign_in_path %> to comment
 <% end %>

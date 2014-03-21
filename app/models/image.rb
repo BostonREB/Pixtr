@@ -5,6 +5,12 @@ class Image < ActiveRecord::Base
   has_many :group_images
   has_many :groups, through: :group_images
 
+  has_many :likes
+
+  has_many :user_likes, 
+    through: :likes, source: :user
+
+  
   # has_many provides:
   # def groups
   # def groups=
@@ -20,4 +26,5 @@ class Image < ActiveRecord::Base
   def user
     gallery.user
   end
+  
 end
