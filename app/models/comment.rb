@@ -4,6 +4,8 @@ class Comment < ActiveRecord::Base
 
   validates :body, presence: true
 
+  has_many :activities, as: :subject, dependent: :destroy
+
   def self.newest #scopes
     order(created_at: :desc)
   end

@@ -7,6 +7,8 @@ class FollowingRelationship < ActiveRecord::Base
 
   validate :cannot_follow_yourself
 
+  has_many :activities, as: :subject, dependent: :destroy
+
 private
 
   def cannot_follow_yourself

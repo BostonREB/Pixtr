@@ -1,7 +1,7 @@
 class ImageLikesController <ApplicationController
 
   def create
-    image = Image.find(params[:id])
+    image = Image.find(params[:id])  #could have pulled out into a method.  "Rule of 2 or 3"
     current_user.like image
     redirect_to image
   end

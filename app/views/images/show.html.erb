@@ -23,7 +23,7 @@
       <%= button_to "Like", like_image_path(@image) %>
     <% end %>
 
-    <p><%= @image.likes.size %> users have liked this image!</p>
+    <%= pluralize(@image.likes.count, "Like") %>
 
     <%= form_for [@image, @comment] do |form| %>
       <%= form.text_area :body %>

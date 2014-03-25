@@ -1,5 +1,5 @@
 Clearance.configure do |config|
   config.mailer_sender = 'reply@example.com'
 
-  config.redirect_url = '/galleries'
+  config.redirect_url = '/dashboard'
 end

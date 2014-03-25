@@ -2,6 +2,9 @@ Pixtr::Application.routes.draw do
 get "galleries/random_gallery" => "random_galleries#show"
 
   root "homes#show"
+
+  resource :dashboard, only: [:show]
+  
   resources :galleries do
     resources :images, only: [:new, :create]
   end
@@ -14,8 +17,8 @@ get "galleries/random_gallery" => "random_galleries#show"
   end
 
   resources :images, except: [:index, :new, :create] do
-    member do
-      post "like" => "image_likes#create"
+    member do  #
+      post "like" => "image_likes#create"   #should have just called it "likes"
       delete "unlike" => "image_likes#destroy"
     end
     resources :comments, only: [:create]
