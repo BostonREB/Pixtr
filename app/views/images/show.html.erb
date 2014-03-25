@@ -17,10 +17,10 @@
 
 <% if signed_in? %>
 
-    <% if current_user.liked? @image %>
-      <%= button_to "Unlike", unlike_image_path(@image), method: :delete %>
+    <% if current_user.likes? @image %>
+      <%= button_to "Unlike Image", unlike_image_path(@image), method: :delete %>
     <% else %>  
-      <%= button_to "Like", like_image_path(@image) %>
+      <%= button_to "Like Image", like_image_path(@image) %>
     <% end %>
 
     <%= pluralize(@image.likes.count, "Like") %>

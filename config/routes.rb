@@ -6,6 +6,10 @@ get "galleries/random_gallery" => "random_galleries#show"
   resource :dashboard, only: [:show]
   
   resources :galleries do
+    member do  #
+      post "like" => "gallery_likes#create"   #should have just called it "likes"
+      delete "unlike" => "gallery_likes#destroy"
+    end
     resources :images, only: [:new, :create]
   end
 
@@ -13,6 +17,10 @@ get "galleries/random_gallery" => "random_galleries#show"
     member do
       post "join" => "group_memberships#create"
       delete "leave" => "group_memberships#destroy"
+    end
+    member do  #
+      post "like" => "group_likes#create"   #should have just called it "likes"
+      delete "unlike" => "group_likes#destroy"
     end
   end
 

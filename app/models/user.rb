@@ -28,15 +28,11 @@ class User < ActiveRecord::Base
   has_many :likes, dependent: :destroy
 
   has_many :liked_images,
-    through: :likes, source: :image #source: tells rails to look for 
+    through: :likes, source: :likable, source_type: 'Image' #source: tells rails to look for 
 
   def follow(other_user)
     follows = followed_user_relationships.create(followed_user: other_user)
-    followers.each do |follower|
-      follower.activities.create(
-        subject: follows,
-        type: "FollowingUserActivity")
-    end
+    notify_followers(follows, "FollowingUserActivity")
   end
 
   def unfollow(other_user)
@@ -48,12 +44,10 @@ class User < ActiveRecord::Base
   end
 
   def join(group)
+      #groups << group  ##creates group_membership and returns an array of groups [<#group>, <#group>]
     joining_group = group_memberships.create(group: group)
-    followers.each do |follower|
-      follower.activities.create(
-        subject: joining_group,
-        type: "JoiningGroupActivity")
-    end
+      # creates group_membership but returns the single group_membership created <#group_membership>
+    notify_followers(joining_group, "JoiningGroupActivity")
   end
 
   def leave(group)
@@ -64,21 +58,25 @@ class User < ActiveRecord::Base
     group_ids.include? group.id
   end 
 
-  def like(image)
-    like = likes.create(image: image)
+  def like(target)
+    like = likes.create(likable: target)
+    notify_followers(like, "LikeActivity")
+  end
+
+  def unlike(target)
+    like = likes.find_by(likable: target)
+    like.destroy
+  end
+
+  def likes?(target)
+    likes.exists?(likable: target)
+  end
+
+  def notify_followers (subject, type)
     followers.each do |follower|
       follower.activities.create(
-        subject: like,
-        type: "LikeActivity")
+        subject: subject,  #polymorphic association
+        type: type)  #single table inheritence
     end
   end
-
-  def unlike(image)
-    liked_images.destroy(image)
-  end
-
-  def liked?(image)
-    liked_image_ids.include? image.id
-  end
-
 end

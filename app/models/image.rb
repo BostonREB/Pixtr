@@ -5,7 +5,7 @@ class Image < ActiveRecord::Base
   has_many :group_images, dependent: :destroy
   has_many :groups, through: :group_images
 
-  has_many :likes, dependent: :destroy
+  has_many :likes, as: :likable, dependent: :destroy
 
   has_many :user_likes, 
     through: :likes, source: :user

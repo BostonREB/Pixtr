@@ -1,9 +1,21 @@
 <h2><%= @group.name %></h2>
 
-<% if current_user.member? @group %>
-  <%= button_to "Leave Group", leave_group_path(@group), method: :delete %>
-<% else %>
-  <%= button_to "Join Group", join_group_path(@group) %>
+<% if signed_in? %>
+  <% if current_user.member? @group %>
+    <%= button_to "Leave Group", leave_group_path(@group), method: :delete %>
+  <% else %>
+   <%= button_to "Join Group", join_group_path(@group) %>
+  <% end %>
 <% end %>
+
+<% if signed_in? %>
+    <% if current_user.likes? @group %>
+      <%= button_to "Unlike Group", unlike_group_path(@group), method: :delete %>
+    <% else %>  
+      <%= button_to "Like Group", like_group_path(@group) %>
+    <% end %>
+<% end %>
+
+    <%= pluralize(@group.likes.count, "Like") %>
 
 <%= render @images %>

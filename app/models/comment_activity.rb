@@ -1,5 +1,6 @@
 class CommentActivity < Activity 
 
+
  def image
     subject.image
   end
@@ -11,4 +12,9 @@ class CommentActivity < Activity
   def email
     subject.user.email
   end
+
+  def body
+    subject.body
+  end
+  
 end
