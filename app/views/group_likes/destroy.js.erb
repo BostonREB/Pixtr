@@ -1,0 +1,1 @@
+$("#like_button_form").html("<%=j button_to 'Like Group', like_group_path(@group), remote: true %><%= pluralize(@group.likes.count, "Like") %>")

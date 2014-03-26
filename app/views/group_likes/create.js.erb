@@ -1,0 +1,1 @@
+$("#like_button_form").html("<%=j button_to 'Unlike Group', unlike_group_path(@group), method: :delete, remote: true %><%= pluralize(@group.likes.count, "Like") %>")

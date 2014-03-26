@@ -9,13 +9,18 @@
 <% end %>
 
 <% if signed_in? %>
+
+  <div id="like_button_form" %>
     <% if current_user.likes? @group %>
-      <%= button_to "Unlike Group", unlike_group_path(@group), method: :delete %>
+      <%= button_to "Unlike Group", unlike_group_path(@group), method: :delete, remote: true %>
     <% else %>  
-      <%= button_to "Like Group", like_group_path(@group) %>
+      <%= button_to "Like Group", like_group_path(@group), remote: true %>
     <% end %>
-<% end %>
 
     <%= pluralize(@group.likes.count, "Like") %>
+  </div>
+
+<% end %>
+
 
 <%= render @images %>
