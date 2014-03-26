@@ -18,7 +18,7 @@ class ImagesController < ApplicationController
   def show
     @image = Image.find(params[:id])
     @comment = Comment.new
-    @comments = @image.comments.newest.page(params[:page]).per(2)
+    @comments = @image.comments.newest.page(params[:page]).per(3)
   end
 
   def edit

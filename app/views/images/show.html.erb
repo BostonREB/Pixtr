@@ -27,7 +27,7 @@
     <%= pluralize(@image.likes.count, "Like") %>
   </div>
 
-    <%= form_for [@image, @comment] do |form| %>
+    <%= form_for [@image, @comment], remote: true do |form| %>
       <%= form.text_area :body %>
       <%= form.submit "Comment" %>
     <% end %> 
@@ -36,10 +36,11 @@
   <%= link_to "Sign In", sign_in_path %> to comment
 <% end %>
 
-
-<%= render @comments %>
-<% # render can render a collection.  It iterates over each of the things in the collection %>
-<% # Ruby knows the class of the object, here comment, and it uses a local variable of the same type in the partial %>
-<% # VVV same as the above %>  
-<% #render "comments/comment", collection: @comments %>
-<%= paginate @comments %>
+<div id="comments">
+  <%= render @comments %>
+  <% # render can render a collection.  It iterates over each of the things in the collection %>
+  <% # Ruby knows the class of the object, here comment, and it uses a local variable of the same type in the partial %>
+  <% # VVV same as the above %>  
+  <% #render "comments/comment", collection: @comments %>
+  <%= paginate @comments %>
+</div>
