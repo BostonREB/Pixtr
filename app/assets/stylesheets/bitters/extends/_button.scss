@@ -1,5 +1,5 @@
 %button {
-  @include button(simple, $base-accent-color);
+  @include button(simple, $base-button-color);
   -webkit-font-smoothing: antialiased;
   font-size: $base-font-size;
   font-weight: bold;

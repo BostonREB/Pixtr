@@ -16,6 +16,7 @@ $base-border-radius: em(3);
 ///////////////////////////////////////////////////////////////////////////////
 
 $blue: #477DCA;
+$burgundy: #660000;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #DDD;
@@ -29,6 +30,8 @@ $base-body-color: white;
 //  Font Colors
 $base-font-color: $dark-gray;
 $base-accent-color: $blue;
+$base-button-color: $blue;
+$base-bad-button-color: $light-red;
 
 //  Text Link Colors
 $base-link-color: $base-accent-color;
