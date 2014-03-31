@@ -1,1 +1,1 @@
-$("#like_button_form").html("<%=j button_to 'Like Gallery', like_gallery_path(@gallery), remote: true %><%= pluralize(@gallery.likes.count, "Like") %>")
+$("#like_button_form").html("<%=j button_to 'Like Gallery', like_gallery_path(@gallery), remote: true %><%= pluralize(@gallery.likes.count, "Like") %>");

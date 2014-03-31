@@ -31,6 +31,8 @@ group :development do
   gem 'pry-rails'
   # gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'quiet_assets' #cleans up log file
+  gem 'bullet' #looks for "n+1" -- 
 end
 
 group :doc do
@@ -56,3 +58,6 @@ end
 
 gem 'clearance'
 gem 'kaminari'
+gem 'bourbon'
+gem 'neat'
+gem 'bitters'

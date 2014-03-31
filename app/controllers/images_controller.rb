@@ -9,6 +9,7 @@ class ImagesController < ApplicationController
     @gallery = current_user.galleries.find(params[:gallery_id])
     @image = @gallery.images.new(image_params)
     if @image.save
+      current_user.notify_followers(@image, @image, "ImageActivity")
       redirect_to @gallery
     else
       render :new #only renders the template and displays the previously entered data o user can make changes
@@ -18,7 +19,7 @@ class ImagesController < ApplicationController
   def show
     @image = Image.find(params[:id])
     @comment = Comment.new
-    @comments = @image.comments.newest.page(params[:page]).per(3)
+    @comments = @image.comments.newest.page(params[:page]).per(3).includes(:user)
   end
 
   def edit

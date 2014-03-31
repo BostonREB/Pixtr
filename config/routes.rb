@@ -32,6 +32,8 @@ get "galleries/random_gallery" => "random_galleries#show"
     resources :comments, only: [:create]
   end
 
+  resources :comments, only: [:destroy]
+
   resources :users, only: [:show] do
     member do # /users/:id.  A member of the user.
       post "follow" => "following_relationships#create"

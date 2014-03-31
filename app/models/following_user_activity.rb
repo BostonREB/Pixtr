@@ -1,14 +1,14 @@
 class FollowingUserActivity < Activity 
 
   def followed_user
-    subject.followed_user
+    target
   end
 
   def followed_user_name
-    followed_user.name 
+    target.name 
   end
 
   def email
-    subject.follower.email
+    actor.email
   end
 end

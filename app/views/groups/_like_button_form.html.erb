@@ -1,0 +1,7 @@
+<% if current_user.likes? group %>
+    <%= button_to "Unlike Group", unlike_group_path(group), method: :delete, remote: true %>
+<% else %>  
+    <%= button_to "Like Group", like_group_path(group), remote: true %>
+<% end %>
+
+<%= pluralize(group.likes.count, "Like") %>

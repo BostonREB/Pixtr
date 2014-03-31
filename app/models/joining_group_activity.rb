@@ -1,7 +1,7 @@
 class JoiningGroupActivity < Activity
 
  def group
-    subject.group
+    target
   end
 
   def group_name
@@ -9,6 +9,6 @@ class JoiningGroupActivity < Activity
   end
 
   def email
-    subject.member.email
+    actor.email
   end
 end

@@ -30,7 +30,17 @@ GEM
     bcrypt (3.1.7)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bitters (0.9.3)
+      bourbon (>= 3.1)
+      sass (>= 3.2)
+      thor
+    bourbon (3.1.8)
+      sass (>= 3.2.0)
+      thor
     builder (3.1.4)
+    bullet (4.8.0)
+      activesupport
+      uniform_notifier (>= 1.4.0)
     clearance (1.2.1)
       bcrypt
       email_validator (~> 1.4)
@@ -67,6 +77,9 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.9.0)
+    neat (1.5.0)
+      bourbon (>= 2.1)
+      sass (>= 3.2)
     pg (0.17.1)
     polyglot (0.3.4)
     pry (0.9.12.6)
@@ -75,6 +88,8 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.2)
       pry (>= 0.9.10)
+    quiet_assets (1.0.2)
+      railties (>= 3.1, < 5.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -131,19 +146,25 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    uniform_notifier (1.4.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   binding_of_caller
+  bitters
+  bourbon
+  bullet
   clearance
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails
   kaminari
+  neat
   pg
   pry-rails
+  quiet_assets
   rails (= 4.0.3)
   rails_12factor
   sass-rails (~> 4.0.0)

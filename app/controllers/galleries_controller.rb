@@ -9,6 +9,7 @@ class GalleriesController < ApplicationController
 
   def show
     @gallery = Gallery.find(params[:id])
+    @images = @gallery.images.includes(gallery: [:user])
   end
 
   def new
@@ -18,7 +19,7 @@ class GalleriesController < ApplicationController
   def create
     @gallery = current_user.galleries.new(gallery_params)  #creates gallery that belongs to user
     if @gallery.save
-      current_user.notify_followers(@gallery, "GalleryActivity")
+      current_user.notify_followers(@gallery, @gallery, "GalleryActivity")
       redirect_to @gallery
     else
       render :new #only renders the template and displays the previously entered data o user can make changes

@@ -1,11 +1,11 @@
-class GalleryActivity < Activity
+class ImageActivity < Activity
 
 
- def gallery
+ def image
     target
   end
 
-  def gallery_name
+  def image_name
     target.name 
   end
 

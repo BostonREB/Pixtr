@@ -2,15 +2,15 @@ class CommentActivity < Activity
 
 
  def image
-    subject.image
+    target
   end
 
   def image_name
-    image.name 
+    target.name 
   end
 
   def email
-    subject.user.email
+    actor.email
   end
 
   def body

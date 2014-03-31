@@ -1,0 +1,7 @@
+<% if current_user.likes? image %>
+  <%= button_to "Unlike Image", unlike_image_path(image), method: :delete, remote: true %>
+<% else %>  
+  <%= button_to "Like Image", like_image_path(image), remote: true %>
+<% end %>
+
+<%= pluralize(image.likes.count, "Like") %>

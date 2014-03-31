@@ -18,19 +18,13 @@
 <% if signed_in? %>
 
   <div id="like_button_form">
-    <% if current_user.likes? @image %>
-      <%= button_to "Unlike Image", unlike_image_path(@image), method: :delete, remote: true %>
-    <% else %>  
-      <%= button_to "Like Image", like_image_path(@image), remote: true %>
-    <% end %>
-
-    <%= pluralize(@image.likes.count, "Like") %>
+    <%= render "like_button_form", image: @image %>
   </div>
 
-    <%= form_for [@image, @comment], remote: true do |form| %>
-      <%= form.text_area :body %>
-      <%= form.submit "Comment" %>
-    <% end %> 
+  <%= form_for [@image, @comment], remote: true do |form| %>
+    <%= form.text_area :body %>
+    <%= form.submit "Comment" %>
+  <% end %> 
 
 <% else %>
   <%= link_to "Sign In", sign_in_path %> to comment
