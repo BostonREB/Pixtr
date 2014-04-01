@@ -61,3 +61,5 @@ gem 'kaminari'
 gem 'bourbon'
 gem 'neat'
 gem 'bitters'
+gem 'delayed_job_active_record'
+
