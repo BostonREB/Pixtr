@@ -10,12 +10,8 @@ class Image < ActiveRecord::Base
   has_many :user_likes, 
     through: :likes, source: :user
 
-  
-  # has_many provides:
-  # def groups
-  # def groups=
-  # def group_ids
-  # def group_ids=
+  has_many :taggings
+  has_many :tags, through: :taggings
 
   validates :name, presence: true
   validates :description, presence: true
@@ -25,6 +21,26 @@ class Image < ActiveRecord::Base
 
   def user
     gallery.user
+  end
+
+  def self.tagged_with(name)
+    Tag.find_by_name!(name).images
+  end
+
+  def self.tag_counts
+    Tag.select("tags.*, count(taggings.tag_id) as count").
+    joins(:taggings).group("taggings.tag_id")
+  end
+
+  def tag_list
+    tags.map(&:name).join(", ")  #calls method :name on all tags and returns array of those names, separated by commas
+  end
+
+  def tag_list=(tag_string)
+    tag_string.split(",").each do |tag_name|
+        tag = Tag.find_or_create_by(:name, tag_name.strip.downcase)
+        tags << tag
+    end
   end
   
 end

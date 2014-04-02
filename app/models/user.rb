@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
           type: type,  #single table inheritence
           actor: self,
           target: target)
-        UserMailer.delay.notice_email(follower, activity)
+        UserMailer.notice_email(follower, activity)
       end
     end
   end

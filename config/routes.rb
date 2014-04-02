@@ -4,6 +4,8 @@ get "galleries/random_gallery" => "random_galleries#show"
   root "homes#show"
 
   resource :dashboard, only: [:show]
+
+  resources :tags, only: [:show]
   
   resources :galleries do
     member do  #
@@ -40,4 +42,6 @@ get "galleries/random_gallery" => "random_galleries#show"
       delete "unfollow" => "following_relationships#destroy"
     end
   end
+
+
 end

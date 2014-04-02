@@ -1,5 +1,13 @@
 class ImagesController < ApplicationController
 
+  def index
+    if params[:tag]
+      @images = Image.tagged_with(params[:tag])
+    else
+      @images = current_user.images
+    end  
+  end
+
   def new
     @gallery = current_user.galleries.find(params[:gallery_id])
     @image = Image.new
@@ -20,6 +28,7 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
     @comment = Comment.new
     @comments = @image.comments.newest.page(params[:page]).per(3).includes(:user)
+    @tags = @image.tags
   end
 
   def edit
@@ -57,6 +66,7 @@ private
       :name, 
       :url, 
       :description,
+      :tag_list,
       group_ids: []
     )
   end
