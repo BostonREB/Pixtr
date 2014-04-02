@@ -37,10 +37,21 @@ class Image < ActiveRecord::Base
   end
 
   def tag_list=(tag_string)
-    tag_string.split(",").each do |tag_name|
-        tag = Tag.find_or_create_by(:name, tag_name.strip.downcase)
-        tags << tag
+    tags = tag_string.split(",").map do |tag_name|
+      Tag.find_or_create_by(name: tag_name.strip.downcase)
     end
+      self.tags = tags
   end
+
+  def self.search(search_params)
+    query = search_params[:query]
+    tags = Tag.search(search_params)
+    image_ids = Tagging.where(tag_id: tags).pluck(:image_id)
+    where("name ILIKE :query OR description ILIKE :query OR id IN (:image_ids)", query: "%#{query}%", image_ids: image_ids)
+  end
+
+  # def self.search(query)
+  #   where("name ilike ? OR description ilike ?", "%#{query}%", "%#{query}%") 
+  # end
   
 end

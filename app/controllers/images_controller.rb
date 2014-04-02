@@ -5,7 +5,12 @@ class ImagesController < ApplicationController
       @images = Image.tagged_with(params[:tag])
     else
       @images = current_user.images
-    end  
+    end 
+    if params[:search]
+      @users = User.search(params[:search]).order("created_at DESC")
+    else
+      @users = User.all.order('created_at DESC')
+    end
   end
 
   def new
@@ -51,6 +56,8 @@ class ImagesController < ApplicationController
     image.destroy
     redirect_to image.gallery
   end
+
+  
 
   #VVV same as above before image was changed in model
   # def destroy

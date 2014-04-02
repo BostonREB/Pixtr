@@ -3,6 +3,9 @@ get "galleries/random_gallery" => "random_galleries#show"
 
   root "homes#show"
 
+get "/search" => "searches#index"
+  resource :search, only: [:index]
+
   resource :dashboard, only: [:show]
 
   resources :tags, only: [:show]

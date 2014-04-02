@@ -4,7 +4,13 @@ class GalleriesController < ApplicationController
   def index   #actions are just methods.  Here it's the action "index"
     #any method inside the Controller is an "Action"
     ## renders a view, in this case the "index" view.
-    @galleries = current_user.galleries  #just gives galleries for current_user  
+    @galleries = current_user.galleries  #just gives galleries for current_user 
+    
+    if params[:search]
+    @images = Image.search(params[:search]).order("created_at DESC")
+    else
+    @images = Image.all.order('created_at DESC')
+    end  
   end
 
   def show
