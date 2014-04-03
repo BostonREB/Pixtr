@@ -46,5 +46,7 @@ get "/search" => "searches#index"
     end
   end
 
+  resources :charges
+
 
 end

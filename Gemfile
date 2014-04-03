@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'dotenv-rails', :groups => [:development, :test]
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.3'
 
@@ -62,4 +63,5 @@ gem 'bourbon'
 gem 'neat'
 gem 'bitters'
 gem 'delayed_job_active_record'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 

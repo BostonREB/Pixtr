@@ -1,3 +1,8 @@
+<% if current_user.premium? %>
+  <h3 style="color: green">YOU ARE AWE$OME</h3>
+<% else %>
+  <%= button_to "Become Premium!!!!!", new_charge_path, method: :get %>
+<% end %>
 <h2>WELCOME TO THE DASHBOARD!!</h2>
 
 Recent Activities:
