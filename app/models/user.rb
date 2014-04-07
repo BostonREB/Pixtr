@@ -87,6 +87,6 @@ class User < ActiveRecord::Base
   handle_asynchronously :notify_followers
 
   def premium?
-    stripe_id.length > 0
+    stripe_id.present?
   end
 end

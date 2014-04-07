@@ -46,7 +46,7 @@ get "/search" => "searches#index"
     end
   end
 
-  resources :charges
+  resources :charges, only: [:new, :create]
 
 
 end
