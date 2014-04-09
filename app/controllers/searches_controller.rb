@@ -10,6 +10,12 @@ class SearchesController < ApplicationController
 
   def index
     @query = params[:search][:query]
-    @results = Image.search(params[:search]).includes(gallery: [:user])
+    @results = find_images
   end
+
+  def find_images
+    image_searcher = ImageSearcher.new(params[:search])
+    image_searcher.images.includes(gallery: [:user])
+  end
+
 end

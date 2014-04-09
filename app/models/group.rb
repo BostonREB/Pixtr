@@ -12,4 +12,8 @@ class Group < ActiveRecord::Base
   validates :name, presence: true
   # validates :user_id, presence: true, uniqueness: { scope: :likable}
   # validates :likable, presence: true
+
+  # def has_member(user)
+  #   member_ids.includes? user.user_id
+  # end
 end

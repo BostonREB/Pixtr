@@ -30,9 +30,13 @@ class User < ActiveRecord::Base
   has_many :liked_images,
     through: :likes, source: :likable, source_type: 'Image' #source: tells rails to look for 
 
+  # def follow(other_user)
+  #   follows = followed_user_relationships.create(followed_user: other_user)
+  #   notify_followers(follows, other_user, "FollowingUserActivity")
+  # end
+
   def follow(other_user)
-    follows = followed_user_relationships.create(followed_user: other_user)
-    notify_followers(follows, other_user, "FollowingUserActivity")
+    followed_user_relationships.create(followed_user: other_user)
   end
 
   def unfollow(other_user)
@@ -44,10 +48,7 @@ class User < ActiveRecord::Base
   end
 
   def join(group)
-      #groups << group  ##creates group_membership and returns an array of groups [<#group>, <#group>]
-    joining_group = group_memberships.create(group: group)
-      # creates group_membership but returns the single group_membership created <#group_membership>
-    notify_followers(joining_group, group, "JoiningGroupActivity")
+    group_memberships.create(group: group)
   end
 
   def leave(group)
@@ -60,7 +61,6 @@ class User < ActiveRecord::Base
 
   def like(target)
     like = likes.create(likable: target)
-    notify_followers(like, target, "LikeActivity")
   end
 
   def unlike(target)
@@ -71,20 +71,6 @@ class User < ActiveRecord::Base
   def likes?(target)
     likes.exists?(likable: target)
   end
-
-  def notify_followers(subject, target, type)
-    if subject.persisted?
-      followers.each do |follower|
-        activity = follower.activities.create(
-          subject: subject,  #polymorphic association
-          type: type,  #single table inheritence
-          actor: self,
-          target: target)
-        UserMailer.notice_email(follower, activity)
-      end
-    end
-  end
-  handle_asynchronously :notify_followers
 
   def premium?
     stripe_id.length > 0

@@ -1,10 +1,10 @@
 class CommentsController < ApplicationController
 
   def create
-    image = Image.find(params[:image_id])
+    image = find_image
     @comment = image.comments.new(comment_params)
     if @comment.save
-      current_user.notify_followers(@comment, image, "CommentActivity")
+      notify_followers(@comment, image, "CommentActivity")
     else
       redirect_to image, alert: "You cannot add an empty comment"
     end
@@ -22,5 +22,8 @@ private
     merge(user_id: current_user.id)
   end
 
+  def find_image
+    Image.find(params[:image_id]) 
+  end 
 end
 

@@ -6,5 +6,4 @@ class Like < ActiveRecord::Base
 
   validates :user, presence: true, uniqueness: { scope: [:likable_id, :likable_type] }
   validates :likable, presence: true
-
 end

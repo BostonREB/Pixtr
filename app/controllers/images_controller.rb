@@ -6,6 +6,7 @@ class ImagesController < ApplicationController
     else
       @images = current_user.images
     end 
+
     if params[:search]
       @users = User.search(params[:search]).order("created_at DESC")
     else
@@ -21,6 +22,7 @@ class ImagesController < ApplicationController
   def create
     @gallery = current_user.galleries.find(params[:gallery_id])
     @image = @gallery.images.new(image_params)
+
     if @image.save
       current_user.notify_followers(@image, @image, "ImageActivity")
       redirect_to @gallery
@@ -43,6 +45,7 @@ class ImagesController < ApplicationController
 
   def update 
     @image = current_user.images.find(params[:id])
+    
     if @image.update(image_params)
       redirect_to @image
     else
@@ -57,9 +60,7 @@ class ImagesController < ApplicationController
     redirect_to image.gallery
   end
 
-  
-
-  #VVV same as above before image was changed in model
+ #VVV same as above before image was changed in model
   # def destroy
   #   image = Image.find(params[:id])
   #   image.destroy

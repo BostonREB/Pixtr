@@ -1,15 +1,21 @@
 class GroupLikesController <ApplicationController
 
   def create
-    @group = Group.find(params[:id])  #could have pulled out into a method.  "Rule of 2 or 3"
+    @group = find_group
     current_user.like @group
     render :change
   end
 
   def destroy
-    @group = Group.find(params[:id])
+    @group = find_group
     current_user.unlike @group
     render :change
+  end
+
+  private
+
+  def find_group
+    Group.find(params[:id])
   end
 
 end

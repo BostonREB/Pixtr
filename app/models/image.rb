@@ -31,24 +31,21 @@ class Image < ActiveRecord::Base
     Tag.select("tags.*, count(taggings.tag_id) as count").
     joins(:taggings).group("taggings.tag_id")
   end
-
+ 
   def tag_list
-    tags.map(&:name).join(", ")  #calls method :name on all tags and returns array of those names, separated by commas
+    tags.pluck(:name).join(", ")  #calls method :name on all tags and returns array of those names, separated by commas
   end
 
   def tag_list=(tag_string)
-    tags = tag_string.split(",").map do |tag_name|
-      Tag.find_or_create_by(name: tag_name.strip.downcase)
-    end
-      self.tags = tags
+    self.tags = Tag.from_tag_list(tag_string)
   end
 
-  def self.search(search_params)
-    query = search_params[:query]
-    tags = Tag.search(search_params)
-    image_ids = Tagging.where(tag_id: tags).pluck(:image_id)
-    where("name ILIKE :query OR description ILIKE :query OR id IN (:image_ids)", query: "%#{query}%", image_ids: image_ids)
-  end
+  # def self.search(search_params)
+  #   query = search_params[:query]
+  #   tags = Tag.search(search_params)
+  #   image_ids = Tagging.where(tag_id: tags).pluck(:image_id)
+  #   where("name ILIKE :query OR description ILIKE :query OR id IN (:image_ids)", query: "%#{query}%", image_ids: image_ids)
+  # end
 
   # def self.search(query)
   #   where("name ilike ? OR description ilike ?", "%#{query}%", "%#{query}%") 
